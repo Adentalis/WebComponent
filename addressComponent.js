@@ -1,12 +1,28 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
-    div{
-        color: #ccc;
+    .component{
+        display:grid;
+        background-color: #eee;
+        margin: 10px;
+    }
+    #address{
+        color: #333;
         font-weight: bold;
+        font-size: 20px;
+    }
+    .component div{
+        color: #555;
     }
 </style>
-<div> Adresse</div>
+<div class ="component">
+    <div id="address"> Adresse</div>
+    <div id="city"> PLZ </div>
+    <div id="street"> Straße</div>
+    <div id="country"> Land</div>
+
+</div>
+
 `;
 
 class AddressComponent extends HTMLElement {
