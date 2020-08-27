@@ -4,7 +4,6 @@ template.innerHTML = `
 
 .component {
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
   grid-gap: 10px;
   background-color: #eee;
   margin: 10px;
@@ -64,9 +63,6 @@ template.innerHTML = `
 }
 
 @media (max-width: 600px) {
-  .component {
-    grid-template-rows: 1fr 2fr 2fr 1fr;
-  }
   .row {
     grid-template-columns: 100px 1fr;
   }
@@ -74,17 +70,8 @@ template.innerHTML = `
   #address {
     font-weight: bold;
     font-size: 20px;
-    color: #aaa;
-    grid-column: 1/2;
   }
 
-  #plz_Label {
-    grid-column: 1/2;
-  }
-
-  #plz_Input {
-    grid-column: 2/3;
-  }
   #city_Label {
     grid-column: 1/2;
   }
@@ -98,6 +85,7 @@ template.innerHTML = `
   #streets_Select {
     grid-column: 2/3;
   }
+  
   #nr_Label {
     grid-column: 1/2;
   }
