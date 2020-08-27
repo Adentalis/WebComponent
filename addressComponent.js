@@ -1,31 +1,24 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
-.component {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  background-color: #eee;
-  margin: 10px;
-}
-.component a {
-  color: #555;
-}
-#address {
-  color: #333;
-  font-weight: bold;
-  font-size: 20px;
-}
-#city {
-  grid-row: 2/3;
-}
-#street {
-  grid-row: 3/4;
-}
-#country {
-  grid-row: 4/5;
-}
-    
+    .component {
+      display: grid;
+      grid-gap: 10px;
+      background-color: #eee;
+      margin: 10px;
+      padding:10px;
+    }
 
+    .component a {
+      color: #555;
+    }
+
+    #address {
+      color: #333;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    
 </style>
 <div class="component">
 <div id="address">
