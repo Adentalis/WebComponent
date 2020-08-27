@@ -1,6 +1,7 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
+
 .component {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
@@ -60,6 +61,49 @@ template.innerHTML = `
 }
 #country_Input {
   grid-column: 2/7;
+}
+
+@media (max-width: 600px) {
+  .component {
+    grid-template-rows: 1fr 2fr 2fr 1fr;
+  }
+  .row {
+    grid-template-columns: 100px 1fr;
+  }
+
+  #address {
+    font-weight: bold;
+    font-size: 20px;
+    color: #aaa;
+    grid-column: 1/2;
+  }
+
+  #plz_Label {
+    grid-column: 1/2;
+  }
+
+  #plz_Input {
+    grid-column: 2/3;
+  }
+  #city_Label {
+    grid-column: 1/2;
+  }
+  #city_Input {
+    grid-column: 2/3;
+  }
+
+  #street_Label {
+    grid-column: 1/2;
+  }
+  #streets_Select {
+    grid-column: 2/3;
+  }
+  #nr_Label {
+    grid-column: 1/2;
+  }
+  #nr_Input {
+    grid-column: 2/3;
+  }
 }
 </style>
 <div class="component">
