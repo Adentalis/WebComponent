@@ -3,9 +3,8 @@ template.innerHTML = `
 <style>
 .component {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 70px repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  grid-gap: 10px;
   background-color: #eee;
   margin: 10px;
   padding: 10px;
@@ -13,77 +12,81 @@ template.innerHTML = `
 
 .component a {
   color: #555;
+  align-self: center;
+  justify-self: end;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 70px repeat(5, 1fr);
+  grid-gap: 10px;
 }
 
 #address {
-  color: #333;
   font-weight: bold;
   font-size: 20px;
-  grid-row: 1/2;
-  grid-column: 1/2;
+  color: #aaa;
 }
 
 #plz_Label {
   grid-column: 1/2;
-  grid-row: 2/3;
 }
+
 #plz_Input {
   grid-column: 2/3;
-  grid-row: 2/3;
 }
 #city_Label {
   grid-column: 3/4;
-  grid-row: 2/3;
 }
 #city_Input {
   grid-column: 4/7;
-  grid-row: 2/3;
 }
 
 #street_Label {
   grid-column: 1/2;
-  grid-row: 3/4;
 }
 #streets_Select {
   grid-column: 2/5;
-  grid-row: 3/4;
 }
 #nr_Label {
   grid-column: 5/6;
-  grid-row: 3/4;
 }
 #nr_Input {
   grid-column: 6/7;
-  grid-row: 3/4;
 }
 
 #country_Label {
   grid-column: 1/2;
-  grid-row: 4/5;
 }
-
 #country_Input {
   grid-column: 2/7;
-  grid-row: 4/5;
 }
 </style>
 <div class="component">
-<a id="address">Adresse</a>
+    <div id="address" class="row">
+      <a>Adresse</a>
+    </div>
 
-<a id="plz_Label">PLZ</a>
-<input id="plz_Input" type="number" />
-<a id="city_Label">Stadt</a>
-<input id="city_Input" />
+    <div id="city" class="row">
+      <a id="plz_Label">PLZ</a>
+       <input id="plz_Input" type="number" />
+       <a id="city_Label">Stadt</a>
+       <input id="city_Input" />
+    </div>
 
-<a id="street_Label">Straße</a>
-<select id="streets_Select"></select>
-<a id="nr_Label">Hausnummer</a>
-<input id="nr_Input" type="number" />
+     <div id="street" class="row">
+      <a id="street_Label">Straße</a>
+      <select id="streets_Select"></select>
+      <a id="nr_Label">Hausnummer</a>
+      <input id="nr_Input" type="number" />
+     </div>
 
-<a id="country_Label">Land</a>
-<input id="country_Input" />
-</div>
+    <div id="country" class="row">
+      <a id="country_Label">Land</a>
+      <input id="country_Input" />
+    </div>
 
+  </div>
 `;
 
 class AddressComponent extends HTMLElement {
