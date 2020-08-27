@@ -1,26 +1,55 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
-    .component{
-        display:grid;
-        background-color: #eee;
-        margin: 10px;
-    }
-    #address{
-        color: #333;
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .component div{
-        color: #555;
-    }
-</style>
-<div class ="component">
-    <div id="address"> Adresse</div>
-    <div id="city"> PLZ </div>
-    <div id="street"> Straße</div>
-    <div id="country"> Land</div>
+.component {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  background-color: #eee;
+  margin: 10px;
+}
+.component a {
+  color: #555;
+}
+#address {
+  color: #333;
+  font-weight: bold;
+  font-size: 20px;
+}
+#city {
+  grid-row: 2/3;
+}
+#street {
+  grid-row: 3/4;
+}
+#country {
+  grid-row: 4/5;
+}
+    
 
+</style>
+<div class="component">
+<div id="address">
+  <a>Adresse</a>
+</div>
+
+<div id="city">
+  <a id="plz_Label">PLZ</a>
+  <input id="plz_Input" type="number" />
+  <a id="city_Label">Stadt</a>
+  <input id="city_Input" />
+</div>
+
+<div id="street">
+  <a id="street_Label">Straße</a>
+  <select id="streets_Select"></select>
+  <a id="nr_Label">Hausnummer</a>
+  <input id="nr_Input" type="number" />
+</div>
+
+<div id="country">
+  <a id="country_Label">Land</a>
+  <input id="country_Input" />
+</div>
 </div>
 
 `;
