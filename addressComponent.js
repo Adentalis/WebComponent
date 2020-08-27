@@ -118,6 +118,11 @@ template.innerHTML = `
       <input id="country_Input" />
     </div>
 
+    <div id="information" >
+    <button type="button" id="info">Info</button>
+    <button type="button" id="test">Test</button>
+    </div>
+    
   </div>
 `;
 
