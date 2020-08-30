@@ -122,7 +122,7 @@ template.innerHTML = `
     <button type="button" id="info">Info</button>
     <button type="button" id="test">Test</button>
     </div>
-    
+
   </div>
 `;
 
@@ -131,6 +131,42 @@ class AddressComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  connectedCallback() {
+    this.shadowRoot
+      .querySelector("#info")
+      .addEventListener("click", () => this.testAjax());
+
+    this.shadowRoot
+      .querySelector("#plz_Input")
+      .addEventListener("input", () => this.test());
+  }
+
+  test() {
+    console.log("ff");
+    const btn = this.shadowRoot.querySelector("#info");
+    btn.innerText = "eee";
+  }
+
+  testAjax() {
+    console.log("do ajax call");
+    const corsHelper = "https://cors-anywhere.herokuapp.com/";
+    const url =
+      "https://www.postdirekt.de/plzserver/PlzAjaxServlet?autocomplete=plz&plz_city=W";
+    var avoidCorsURL = corsHelper + url;
+    var xhrObject = new XMLHttpRequest();
+    xhrObject.onreadystatechange = (ekjkj) => {
+      if (xhrObject.readyState === 4) {
+        if (xhrObject.status === 200 || xhrObject.status === 304) {
+          // Success! Do stuff with data.
+          console.log(xhrObject.responseText);
+        }
+      }
+    };
+
+    xhrObject.open("GET", avoidCorsURL, true);
+    xhrObject.send();
   }
 }
 
