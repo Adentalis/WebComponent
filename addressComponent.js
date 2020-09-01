@@ -140,20 +140,28 @@ class AddressComponent extends HTMLElement {
 
     this.shadowRoot
       .querySelector("#plz_Input")
-      .addEventListener("input", () => this.test());
+      .addEventListener("input", () => this.checkInput());
   }
 
-  test() {
-    console.log("ff");
-    const btn = this.shadowRoot.querySelector("#info");
-    btn.innerText = "eee";
+  checkInput() {
+    const input = this.shadowRoot.querySelector("#plz_Input");
+    var plz = input.value;
+
+    if (plz.length > 5) {
+      plz = plz.slice(0, 5);
+      input.value = plz;
+    } else {
+      console.log(plz);
+    }
   }
 
   testAjax() {
     console.log("do ajax call");
+
     const corsHelper = "https://cors-anywhere.herokuapp.com/";
+    const testAPIURL = "https://jsonplaceholder.typicode.com/todos/1";
     const url =
-      "https://www.postdirekt.de/plzserver/PlzAjaxServlet?autocomplete=plz&plz_city=W";
+      "https://www.postdirekt.de/plzserver/PlzAjaxServlet?autocomplete=plz&plz_city=Tr";
     var avoidCorsURL = corsHelper + url;
     var xhrObject = new XMLHttpRequest();
     xhrObject.onreadystatechange = (ekjkj) => {
@@ -165,8 +173,14 @@ class AddressComponent extends HTMLElement {
       }
     };
 
-    xhrObject.open("GET", avoidCorsURL, true);
+    xhrObject.open("GET", testAPIURL, true);
     xhrObject.send();
+  }
+}
+
+function stateChanged(p1, p2) {
+  if (xmlHttp.readyState == 4) {
+    //do something with the response
   }
 }
 
