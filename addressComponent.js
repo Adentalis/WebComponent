@@ -136,6 +136,10 @@ class AddressComponent extends HTMLElement {
   connectedCallback() {
     this.shadowRoot
       .querySelector("#info")
+      .addEventListener("click", () => this.printData());
+
+    this.shadowRoot
+      .querySelector("#test")
       .addEventListener("click", () => this.testAjax());
 
     this.shadowRoot
@@ -148,27 +152,40 @@ class AddressComponent extends HTMLElement {
     var plz = input.value;
 
     if (plz.length > 5) {
-      plz = plz.slice(0, 5);
-      input.value = plz;
+      input.value = plz.slice(0, 5);
     } else {
       console.log(plz);
     }
   }
 
+  printData() {
+    const data = {
+      zip: this.shadowRoot.querySelector("#plz_Input").value,
+      city: this.shadowRoot.querySelector("#city_Input").value,
+      street: this.shadowRoot.querySelector("#streets_Select").value,
+      houseNumber: this.shadowRoot.querySelector("#nr_Input").value,
+      country: "de",
+    };
+    alert(JSON.stringify(data, null, 2));
+  }
+
   testAjax() {
     console.log("do ajax call");
-
     const corsHelper = "https://cors-anywhere.herokuapp.com/";
-    const testAPIURL = "https://jsonplaceholder.typicode.com/todos/1";
     const url =
       "https://www.postdirekt.de/plzserver/PlzAjaxServlet?autocomplete=plz&plz_city=Tr";
     var avoidCorsURL = corsHelper + url;
+
+    const testAPIURL = "https://jsonplaceholder.typicode.com/todos/1";
     var xhrObject = new XMLHttpRequest();
-    xhrObject.onreadystatechange = (ekjkj) => {
+    xhrObject.this = this;
+    xhrObject.onreadystatechange = () => {
       if (xhrObject.readyState === 4) {
         if (xhrObject.status === 200 || xhrObject.status === 304) {
           // Success! Do stuff with data.
           console.log(xhrObject.responseText);
+          this.shadowRoot.querySelector("#city_Input").value =
+            xhrObject.responseText;
         }
       }
     };
