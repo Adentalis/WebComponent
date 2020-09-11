@@ -22,43 +22,53 @@ template.innerHTML = `
   grid-gap: 10px;
 }
 
+.validate{
+  border-color: red;
+  border-radius: 8px;
+  height:25px;
+}
+
+.validate:focus{
+  outline:0;
+}
+
 #address {
   font-weight: bold;
   font-size: 20px;
   color: #aaa;
 }
 
-#plz_Label {
+#plz-label {
   grid-column: 1/2;
 }
 
-#plz_Input {
+#plz-input {
   grid-column: 2/3;
 }
-#city_Label {
+#city-label {
   grid-column: 3/4;
 }
-#city_Input {
+#city-input {
   grid-column: 4/7;
 }
 
-#street_Label {
+#street-label {
   grid-column: 1/2;
 }
-#streets_Select {
+#streets-select {
   grid-column: 2/5;
 }
-#nr_Label {
+#nr-label {
   grid-column: 5/6;
 }
-#nr_Input {
+#nr-input {
   grid-column: 6/7;
 }
 
-#country_Label {
+#country-label {
   grid-column: 1/2;
 }
-#country_Input {
+#country-input {
   grid-column: 2/7;
 }
 
@@ -72,24 +82,24 @@ template.innerHTML = `
     font-size: 20px;
   }
 
-  #city_Label {
+  #city-label {
     grid-column: 1/2;
   }
-  #city_Input {
+  #city-input {
     grid-column: 2/3;
   }
 
-  #street_Label {
+  #street-label {
     grid-column: 1/2;
   }
-  #streets_Select {
+  #streets_select {
     grid-column: 2/3;
   }
   
-  #nr_Label {
+  #nr-label {
     grid-column: 1/2;
   }
-  #nr_Input {
+  #nr-input {
     grid-column: 2/3;
   }
 }
@@ -100,22 +110,22 @@ template.innerHTML = `
     </div>
 
     <div id="city" class="row">
-      <a id="plz_Label">PLZ</a>
-       <input id="plz_Input" type="number" />
-       <a id="city_Label">Stadt</a>
-       <input id="city_Input" />
+      <a id="plz-label">PLZ</a>
+       <input id="plz-input" class="validate" type="number" min="0" max="99999"/>
+       <a id="city-label">Stadt</a>
+       <input id="city-input" class="validate"/>
     </div>
 
      <div id="street" class="row">
-      <a id="street_Label">Straße</a>
-      <select id="streets_Select"></select>
-      <a id="nr_Label">Hausnummer</a>
-      <input id="nr_Input" type="number" />
+      <a id="street-label">Straße</a>
+      <select id="streets-select" class="validate"></select>
+      <a id="nr-label">Hausnummer</a>
+      <input id="nr-input" type="number" class="validate"/>
      </div>
 
     <div id="country" class="row">
-      <a id="country_Label">Land</a>
-      <input id="country_Input" />
+      <a id="country-label">Land</a>
+      <input id="country-input" value="Deutschland" />
     </div>
 
     <div id="information" >
@@ -143,12 +153,12 @@ class AddressComponent extends HTMLElement {
       .addEventListener("click", () => this.testAjax());
 
     this.shadowRoot
-      .querySelector("#plz_Input")
+      .querySelector("#plz-input")
       .addEventListener("input", () => this.checkInput());
   }
 
   checkInput() {
-    const input = this.shadowRoot.querySelector("#plz_Input");
+    const input = this.shadowRoot.querySelector("#plz-input");
     var plz = input.value;
 
     if (plz.length > 5) {
@@ -160,10 +170,10 @@ class AddressComponent extends HTMLElement {
 
   printData() {
     const data = {
-      zip: this.shadowRoot.querySelector("#plz_Input").value,
-      city: this.shadowRoot.querySelector("#city_Input").value,
-      street: this.shadowRoot.querySelector("#streets_Select").value,
-      houseNumber: this.shadowRoot.querySelector("#nr_Input").value,
+      zip: this.shadowRoot.querySelector("#plz-input").value,
+      city: this.shadowRoot.querySelector("#city-input").value,
+      street: this.shadowRoot.querySelector("#streets-select").value,
+      houseNumber: this.shadowRoot.querySelector("#nr-input").value,
       country: "de",
     };
     alert(JSON.stringify(data, null, 2));
@@ -184,7 +194,7 @@ class AddressComponent extends HTMLElement {
         if (xhrObject.status === 200 || xhrObject.status === 304) {
           // Success! Do stuff with data.
           console.log(xhrObject.responseText);
-          this.shadowRoot.querySelector("#city_Input").value =
+          this.shadowRoot.querySelector("#city-input").value =
             xhrObject.responseText;
         }
       }
@@ -192,12 +202,6 @@ class AddressComponent extends HTMLElement {
 
     xhrObject.open("GET", testAPIURL, true);
     xhrObject.send();
-  }
-}
-
-function stateChanged(p1, p2) {
-  if (xmlHttp.readyState == 4) {
-    //do something with the response
   }
 }
 
